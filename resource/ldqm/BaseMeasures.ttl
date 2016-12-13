@@ -1,0 +1,532 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix daq: <http://purl.org/eis/vocab/daq#> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix eval: <http://purl.org/net/EvaluationResult#> .
+@prefix om: <http://www.wurvoc.org/vocabularies/om-1.8/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ldq: <http://www.linkeddata.es/ontology/ldq#> .
+@prefix qmo: <http://purl.org/net/QualityModel#> .
+
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/IRIRDFdescription> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric .
+
+<http://linkeddata.es/resource/ldqm/Scale/Boolean> a om:Nominal_scale .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/IRIRDFdescription> qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "IRI RDF description" ;
+	dc:description "Whether an IRI is described with the RDF data." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/IRIcontenttype> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "IRI content type" ;
+	dc:description "Whether a response of dereference request of an IRI returns a content type HTTP header." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Contentnegotiationsupport> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "Content negotiation support" ;
+	dc:description "Whether an IRI supports content negotiation." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Acceptheadersupport> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "Accept header support" ;
+	dc:description "Whether an IRI supports accept header in HTTP HEAD operations." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/SustainableIRI> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "Sustainable IRI" ;
+	dc:description "Whether an IRI is available and maintained over a long period of time." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofinternalredundantproperties> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric .
+
+<http://linkeddata.es/resource/ldqm/Scale/Interval> a om:Interval_scale .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofinternalredundantproperties> qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of internal redundant properties" ;
+	dc:description "Total number of internal redundant properties in a graph or a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofexternalredundantproperties> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of external redundant properties" ;
+	dc:description "Total number of external redundant properties in a graph or a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberoflabels> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of labels" ;
+	dc:description "Number of labels in a graph or dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofunambiguouslabels> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Dataset ;
+	dc:title "Number of unambiguous labels" ;
+	dc:description "Total number of unambiguous labels in a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberoflabeledproperties> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of labeled properties" ;
+	dc:description "Total number of labeled properties in a graph or a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberoflabeledclasses> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of labeled classes" ;
+	dc:description "Total number of labeled clases in a graph or a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberoflabeledentities> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of labeled entities" ;
+	dc:description "Total number of labeled entities in a graph or a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/NumberofIRIs> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Triple , ldq:Graph , ldq:Dataset ;
+	dc:title "Number of IRIs" ;
+	dc:description "Number of IRIs in a triple, graph, or a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/NumberofslashIRIs> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Triple , ldq:Graph , ldq:Dataset ;
+	dc:title "Number of slash IRIs" ;
+	dc:description "Number of slash IRIs in a triple, graph, or a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Latencytime> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "Latency time" ;
+	dc:description "Delay between submission of an HTTP request and reception of the response." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/NumberofansweredHTTPrequest> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "Number of answered HTTP request" ;
+	dc:description "Number of answered HTTP requests per second. FORMULA" .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/1-requesttime> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Dataset ;
+	dc:title "1-request time" ;
+	dc:description "Time to answer one HTTP request." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/10-requesttime> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Dataset ;
+	dc:title "10-request time" ;
+	dc:description "Time to answer ten HTTP requests." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/IRIcacheing> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "IRI cacheing" ;
+	dc:description "Whether an IRI provides caching related information when dereferenced." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/RDFprimitive> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "RDF primitive" ;
+	dc:description "Whether an RDF primitive is present in a triple." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/IRIdereferenceability> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "IRI dereferenceability" ;
+	dc:description "Whether an IRI is dereferenceable." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofdistinctsubjects> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of distinct subjects" ;
+	dc:description "Number of distinct subjects in a graph or dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofdistinctpredicates> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of distinct predicates" ;
+	dc:description "Number of distinct predicates in a graph or dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofdistinctobjects> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of distinct objects" ;
+	dc:description "Number of distinct objects in a graph or dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Dereferenceablesubject> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Dereferenceable subject" ;
+	dc:description "Whether a subject in a triple is dereferenceable." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Dereferenceablepredicate> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Dereferenceable predicate" ;
+	dc:description "Whether a predicate in a triple is dereferenceable." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Dereferenceableobject> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Dereferenceable object" ;
+	dc:description "Whether an object in a triple is dereferenceable." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/CorrectHTTPredirect> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "Correct HTTP redirect" ;
+	dc:description "Whether an HTTP redirect is done in compliance with he recommendation." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/LDPGETsupport> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "LDP GET support" ;
+	dc:description "Whether an IRI supports LDP protocol on GET operations." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/LDPPUTsupport> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "LDP PUT support" ;
+	dc:description "Whether an IRI supports LDP protocol on PUT operations." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/NumberofHTTPIRIs> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Triple , ldq:Graph , ldq:Dataset ;
+	dc:title "Number of HTTP IRIs" ;
+	dc:description "Number of HTTP IRIs in a triple, graph, or a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/ShortIRI> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "Short IRI" ;
+	dc:description "Whether an IRI is short." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Uniqueness> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "Uniqueness" ;
+	dc:description "Whether an IRI is unique." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/StableIRI> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "Stable IRI" ;
+	dc:description "Whether an IRI can be dereferenceable over a long period of time and identify the same concept." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofinconsistentfunctionaldependencesubjects> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of inconsistent functional dependence subjects" ;
+	dc:description "Number of subjects with inconsistent functional dependency." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Subjecttypes> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "Subject types" ;
+	dc:description "A set of classes that an entity represented by an IRI is an instance of." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Misplacedclass> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Misplaced class" ;
+	dc:description "Whether a class in a triple is misplaced." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Misplacedproperty> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Misplaced property" ;
+	dc:description "Whether a property in a triple is misplaced." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Objecttype> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Object type" ;
+	dc:description "Type of an object in a triple." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Deprecatedsubject> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Deprecated subject" ;
+	dc:description "Whether a subject in a triple is an instance of deprecated class." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Deprecatedproperty> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Deprecated property" ;
+	dc:description "Whether a property in a triple is deprecated." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofinvalidinversefunctionalvalues> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of invalid inverse functional values" ;
+	dc:description "Total number of invalid inverse functional values in a graph or a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Ontologyhijacking> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Ontology hijacking" ;
+	dc:description "Whether an ontology related to a triple has been hijacked." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofnegativedependentproperties> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of negative dependent properties" ;
+	dc:description "Total number of negative dependent properties in a graph or a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Geometricviolation> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Geometric violation" ;
+	dc:description "Whether there is a geometric constraint violation in a triple." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Axiomviolation> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Axiom violation" ;
+	dc:description "Whether an axiom is violated in a triple." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Subject> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Subject" ;
+	dc:description "Subject in a triple." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Predicate> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Predicate" ;
+	dc:description "Predicate in a triple." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Object> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Object" ;
+	dc:description "Object in a triple." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofblanknodes> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of blank nodes" ;
+	dc:description "Number of blank nodes in a graph or a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofnodes> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of nodes" ;
+	dc:description "Number of nodes in a graph or a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/NumberofsubjectswithsameAs> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of subjects with sameAs" ;
+	dc:description "Number of distinct subjects in a graph or a dataset with the sameAs link." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofdistinctsubjecttypes> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of distinct subject types" ;
+	dc:description "Total number of distinct subject types in a graph or a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofdistinctproperties> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of distinct properties" ;
+	dc:description "Total number of distinct properties in a graph or a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofinterlinkedsubjects> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of interlinked subjects" ;
+	dc:description "Total number of interlinked subjects in a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofmappabletypes> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of mappable types" ;
+	dc:description "Total number of mappable types in a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofmappedtypes> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of mapped types" ;
+	dc:description "Total number of mapped types in a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Graphdigitalsignature> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:Graph ;
+	dc:title "Graph digital signature" ;
+	dc:description "Whether a graph is digitally signed." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Ranking> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "Ranking" ;
+	dc:description "Ranking of an IRI." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Triplefacttrust> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Triple fact trust" ;
+	dc:description "Trust of a triple." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/One-pathtrust> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "One-path trust" ;
+	dc:description "path trust of a an IRI." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Many-pathtrust> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "Many-path trust" ;
+	dc:description "path trust of a an IRI." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Datasetrating> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Dataset ;
+	dc:title "Dataset rating" ;
+	dc:description "The rating of a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Automaticvalidationerror> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:IRI , ldq:Triple ;
+	dc:title "Automatic validation error" ;
+	dc:description "Whether an IRI or a triple is subject to an automatically discovered error." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Crowdsourcingvalidationerror> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:IRI , ldq:Triple ;
+	dc:title "Crowdsourcing validation error" ;
+	dc:description "Whether an IRI or a triple is subject to an error discovered by crowdsourcing." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofdatatypeobjects> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Dataset ;
+	dc:title "Number of datatype objects" ;
+	dc:description "Number of datatype objects in a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Datatypesyntaxerror> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Datatype syntax error" ;
+	dc:description "Whether a syntax errors is detected by the use of explicit definition of the allowed values for a datatype." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Syntacticrulessyntaxerror> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Syntactic rules syntax error" ;
+	dc:description "Whether a syntax error is detected by using syntactic rules." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/RDFpatternerror> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "RDF pattern error" ;
+	dc:description "Whether the data conforms to the specific RDF pattern and that the “types” are defined for specific resources." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofliterals> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of literals" ;
+	dc:description "Number of literals in a graph or a dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Ill-typedliteral> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	dc:title "Ill-typed literal" ;
+	dc:description "typed." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Objectdatatype> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Object datatype" ;
+	dc:description "Type of a datatype object in a triple." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofdistance-basedoutliers> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Dataset ;
+	dc:title "Number of distance-based outliers" ;
+	dc:description "based method." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofdeviation-basedoutliers> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Dataset ;
+	dc:title "Number of deviation-based outliers" ;
+	dc:description "based method." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofdistribution-basedoutliers> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Dataset ;
+	dc:title "Number of distribution-based outliers" ;
+	dc:description "based method." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Triplecorrectness> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Triple correctness" ;
+	dc:description "Whether a triple is correct or not." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberoftriples> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of triples" ;
+	dc:description "Number of triples in a graph or dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofcrowdsourcedincorrecttriples> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of crowdsourced incorrect triples" ;
+	dc:description "Number of incorrect triples in a graph or dataset judged by crowdsourcing." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofmisspelledliterals> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of misspelled literals" ;
+	dc:description "Number of misspelled literals in a graph or dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofinaccuratelabels> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of inaccurate labels" ;
+	dc:description "Number of inaccurate labels in a graph or dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Correctclassification> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Correct classification" ;
+	dc:description "Whether a triple is correctly classified or not." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Propertymisuse> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Property misuse" ;
+	dc:description "Whether a property in a triple is misused." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofrules> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of rules" ;
+	dc:description "Number of rules in a graph or dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Numberofinvalidrules> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Interval> ;
+	ldq:hasGranularity ldq:Graph , ldq:Dataset ;
+	dc:title "Number of invalid rules" ;
+	dc:description "Number of invalid rules in a graph or dataset." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Entitymismatch> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:IRI ;
+	dc:title "Entity mismatch" ;
+	dc:description "world entity." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Currency> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Currency" ;
+	dc:description "Currency of a triple." .
+
+<http://linkeddata.es/resource/ldqm/BaseMeasure/Volatilit> a qmo:BaseMeasure , qmo:QualityMeasure , dqv:Metric ;
+	qmo:hasScale <http://linkeddata.es/resource/ldqm/Scale/Boolean> ;
+	ldq:hasGranularity ldq:Triple ;
+	dc:title "Volatilit" ;
+	dc:description "Volatility of a tripe." .

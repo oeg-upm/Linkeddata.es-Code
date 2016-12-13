@@ -1,0 +1,1195 @@
+[
+  {
+    "op": "core/column-removal",
+    "description": "Remove column Column",
+    "columnName": "Column"
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column Column2",
+    "columnName": "Column2"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column Measure_name at index 1 based on column Measure using expression grel:value.split(\"(\")[0]",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "Measure_name",
+    "columnInsertIndex": 1,
+    "baseColumnName": "Measure",
+    "expression": "grel:value.split(\"(\")[0]",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/row-removal",
+    "description": "Remove rows",
+    "engineConfig": {
+      "facets": [
+        {
+          "invert": false,
+          "expression": "value",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": true,
+          "name": "Measure_name",
+          "omitBlank": false,
+          "columnName": "Measure_name",
+          "type": "list",
+          "selection": []
+        }
+      ],
+      "mode": "row-based"
+    }
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column scale at index 1 based on column Measure using expression grel:value.substring(\nvalue.indexOf(\"(\")+1,value.indexOf(\")\")).split(\",\")[0]",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "scale",
+    "columnInsertIndex": 1,
+    "baseColumnName": "Measure",
+    "expression": "grel:value.substring(\nvalue.indexOf(\"(\")+1,value.indexOf(\")\")).split(\",\")[0]",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column granularity at index 1 based on column Measure using expression grel:value.substring(\nvalue.indexOf(\"(\")+1,value.indexOf(\")\")).split(\",\")[1]",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "granularity",
+    "columnInsertIndex": 1,
+    "baseColumnName": "Measure",
+    "expression": "grel:value.substring(\nvalue.indexOf(\"(\")+1,value.indexOf(\")\")).split(\",\")[1]",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/column-split",
+    "description": "Split column granularity by separator",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "granularity",
+    "guessCellType": true,
+    "removeOriginalColumn": true,
+    "mode": "separator",
+    "separator": "-",
+    "regex": false,
+    "maxColumns": 0
+  },
+  {
+    "op": "core/column-addition",
+    "description": "Create column definition at index 1 based on column Measure using expression grel:value.substring(\nvalue.lastIndexOf(\"-\")+1,value.length()).trim()",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "definition",
+    "columnInsertIndex": 1,
+    "baseColumnName": "Measure",
+    "expression": "grel:value.substring(\nvalue.lastIndexOf(\"-\")+1,value.length()).trim()",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column scale using expression grel:if(value==\"bolean\",\"boolean\",value)",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "scale",
+    "expression": "grel:if(value==\"bolean\",\"boolean\",value)",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://linkeddata.es/resource/ldqm/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "daq",
+          "uri": "http://purl.org/eis/vocab/daq#"
+        },
+        {
+          "name": "dqv",
+          "uri": "http://www.w3.org/ns/dqv#"
+        },
+        {
+          "name": "eval",
+          "uri": "http://purl.org/net/EvaluationResult#"
+        },
+        {
+          "name": "om",
+          "uri": "http://www.wurvoc.org/vocabularies/om-1.8/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "ldq",
+          "uri": "http://www.linkeddata.es/ontology/ldq#"
+        },
+        {
+          "name": "qmo",
+          "uri": "http://purl.org/net/QualityModel#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"BaseMeasure/\"+value.replace(\" \",\"\")",
+          "isRowNumberCell": false,
+          "columnName": "Measure_name",
+          "rdfTypes": [
+            {
+              "uri": "http://purl.org/net/QualityModel#BaseMeasure",
+              "curie": "qmo:BaseMeasure"
+            },
+            {
+              "uri": "http://purl.org/net/QualityModel#QualityMeasure",
+              "curie": "qmo:QualityMeasure"
+            },
+            {
+              "uri": "http://www.w3.org/ns/dqv#Metric",
+              "curie": "dqv:Metric"
+            }
+          ],
+          "links": []
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://linkeddata.es/resource/ldqm/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "daq",
+          "uri": "http://purl.org/eis/vocab/daq#"
+        },
+        {
+          "name": "dqv",
+          "uri": "http://www.w3.org/ns/dqv#"
+        },
+        {
+          "name": "eval",
+          "uri": "http://purl.org/net/EvaluationResult#"
+        },
+        {
+          "name": "om",
+          "uri": "http://www.wurvoc.org/vocabularies/om-1.8/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "ldq",
+          "uri": "http://www.linkeddata.es/ontology/ldq#"
+        },
+        {
+          "name": "qmo",
+          "uri": "http://purl.org/net/QualityModel#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"BaseMeasure/\"+value.replace(\" \",\"\")",
+          "isRowNumberCell": false,
+          "columnName": "Measure_name",
+          "rdfTypes": [
+            {
+              "uri": "http://purl.org/net/QualityModel#BaseMeasure",
+              "curie": "qmo:BaseMeasure"
+            },
+            {
+              "uri": "http://purl.org/net/QualityModel#QualityMeasure",
+              "curie": "qmo:QualityMeasure"
+            },
+            {
+              "uri": "http://www.w3.org/ns/dqv#Metric",
+              "curie": "dqv:Metric"
+            }
+          ],
+          "links": []
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://linkeddata.es/resource/ldqm/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "daq",
+          "uri": "http://purl.org/eis/vocab/daq#"
+        },
+        {
+          "name": "dqv",
+          "uri": "http://www.w3.org/ns/dqv#"
+        },
+        {
+          "name": "eval",
+          "uri": "http://purl.org/net/EvaluationResult#"
+        },
+        {
+          "name": "om",
+          "uri": "http://www.wurvoc.org/vocabularies/om-1.8/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "ldq",
+          "uri": "http://www.linkeddata.es/ontology/ldq#"
+        },
+        {
+          "name": "qmo",
+          "uri": "http://purl.org/net/QualityModel#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"BaseMeasure/\"+value.replace(\" \",\"\")",
+          "isRowNumberCell": false,
+          "columnName": "Measure_name",
+          "rdfTypes": [
+            {
+              "uri": "http://purl.org/net/QualityModel#BaseMeasure",
+              "curie": "qmo:BaseMeasure"
+            },
+            {
+              "uri": "http://purl.org/net/QualityModel#QualityMeasure",
+              "curie": "qmo:QualityMeasure"
+            },
+            {
+              "uri": "http://www.w3.org/ns/dqv#Metric",
+              "curie": "dqv:Metric"
+            }
+          ],
+          "links": []
+        }
+      ]
+    }
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column Measure_name using expression grel:value.substring(0,value.length()-1)",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "Measure_name",
+    "expression": "grel:value.substring(0,value.length()-1)",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://linkeddata.es/resource/ldqm/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "daq",
+          "uri": "http://purl.org/eis/vocab/daq#"
+        },
+        {
+          "name": "dqv",
+          "uri": "http://www.w3.org/ns/dqv#"
+        },
+        {
+          "name": "eval",
+          "uri": "http://purl.org/net/EvaluationResult#"
+        },
+        {
+          "name": "om",
+          "uri": "http://www.wurvoc.org/vocabularies/om-1.8/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "ldq",
+          "uri": "http://www.linkeddata.es/ontology/ldq#"
+        },
+        {
+          "name": "qmo",
+          "uri": "http://purl.org/net/QualityModel#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"BaseMeasure/\"+value.replace(\" \",\"\")",
+          "isRowNumberCell": false,
+          "columnName": "Measure_name",
+          "rdfTypes": [
+            {
+              "uri": "http://purl.org/net/QualityModel#BaseMeasure",
+              "curie": "qmo:BaseMeasure"
+            },
+            {
+              "uri": "http://purl.org/net/QualityModel#QualityMeasure",
+              "curie": "qmo:QualityMeasure"
+            },
+            {
+              "uri": "http://www.w3.org/ns/dqv#Metric",
+              "curie": "dqv:Metric"
+            }
+          ],
+          "links": []
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://linkeddata.es/resource/ldqm/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "daq",
+          "uri": "http://purl.org/eis/vocab/daq#"
+        },
+        {
+          "name": "dqv",
+          "uri": "http://www.w3.org/ns/dqv#"
+        },
+        {
+          "name": "eval",
+          "uri": "http://purl.org/net/EvaluationResult#"
+        },
+        {
+          "name": "om",
+          "uri": "http://www.wurvoc.org/vocabularies/om-1.8/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "ldq",
+          "uri": "http://www.linkeddata.es/ontology/ldq#"
+        },
+        {
+          "name": "qmo",
+          "uri": "http://purl.org/net/QualityModel#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"BaseMeasure/\"+value.replace(\" \",\"\")",
+          "isRowNumberCell": false,
+          "columnName": "Measure_name",
+          "rdfTypes": [
+            {
+              "uri": "http://purl.org/net/QualityModel#BaseMeasure",
+              "curie": "qmo:BaseMeasure"
+            },
+            {
+              "uri": "http://purl.org/net/QualityModel#QualityMeasure",
+              "curie": "qmo:QualityMeasure"
+            },
+            {
+              "uri": "http://www.w3.org/ns/dqv#Metric",
+              "curie": "dqv:Metric"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://purl.org/net/QualityModel#hasScale",
+              "curie": "qmo:hasScale",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "if(value==\"boolean\",\"Scale/Boolean\",\nif(value ==\"ratio\",\"Scale/Ratio\",\nif(value==\"interval\",\"Scale/Interval\", null)))",
+                "isRowNumberCell": false,
+                "columnName": "scale",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                    "curie": "rdf:type",
+                    "target": {
+                      "nodeType": "cell-as-resource",
+                      "expression": "if(value==\"boolean\",\"http://www.wurvoc.org/vocabularies/om-1.8/Nominal_scale\",\nif(value ==\"ratio\",\"http://www.wurvoc.org/vocabularies/om-1.8/Ratio_scale\",\nif(value==\"interval\",\"http://www.wurvoc.org/vocabularies/om-1.8/Interval_scale\", null)))",
+                      "isRowNumberCell": false,
+                      "columnName": "scale",
+                      "rdfTypes": [],
+                      "links": []
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://linkeddata.es/resource/ldqm/",
+      "prefixes": [
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "daq",
+          "uri": "http://purl.org/eis/vocab/daq#"
+        },
+        {
+          "name": "dqv",
+          "uri": "http://www.w3.org/ns/dqv#"
+        },
+        {
+          "name": "eval",
+          "uri": "http://purl.org/net/EvaluationResult#"
+        },
+        {
+          "name": "om",
+          "uri": "http://www.wurvoc.org/vocabularies/om-1.8/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "ldq",
+          "uri": "http://www.linkeddata.es/ontology/ldq#"
+        },
+        {
+          "name": "qmo",
+          "uri": "http://purl.org/net/QualityModel#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"BaseMeasure/\"+value.replace(\" \",\"\")",
+          "isRowNumberCell": false,
+          "columnName": "Measure_name",
+          "rdfTypes": [
+            {
+              "uri": "http://purl.org/net/QualityModel#BaseMeasure",
+              "curie": "qmo:BaseMeasure"
+            },
+            {
+              "uri": "http://purl.org/net/QualityModel#QualityMeasure",
+              "curie": "qmo:QualityMeasure"
+            },
+            {
+              "uri": "http://www.w3.org/ns/dqv#Metric",
+              "curie": "dqv:Metric"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://purl.org/net/QualityModel#hasScale",
+              "curie": "qmo:hasScale",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "if(value==\"boolean\",\"Scale/Boolean\",\nif(value ==\"ratio\",\"Scale/Ratio\",\nif(value==\"interval\",\"Scale/Interval\", null)))",
+                "isRowNumberCell": false,
+                "columnName": "scale",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                    "curie": "rdf:type",
+                    "target": {
+                      "nodeType": "cell-as-resource",
+                      "expression": "if(value==\"boolean\",\"http://www.wurvoc.org/vocabularies/om-1.8/Nominal_scale\",\nif(value ==\"ratio\",\"http://www.wurvoc.org/vocabularies/om-1.8/Ratio_scale\",\nif(value==\"interval\",\"http://www.wurvoc.org/vocabularies/om-1.8/Interval_scale\", null)))",
+                      "isRowNumberCell": false,
+                      "columnName": "scale",
+                      "rdfTypes": [],
+                      "links": []
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column granularity 1 using expression grel:value.substring(1,value.length())",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "granularity 1",
+    "expression": "grel:value.substring(1,value.length())",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://linkeddata.es/resource/ldqm/",
+      "prefixes": [
+        {
+          "name": "dc",
+          "uri": "http://purl.org/dc/elements/1.1/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "daq",
+          "uri": "http://purl.org/eis/vocab/daq#"
+        },
+        {
+          "name": "dqv",
+          "uri": "http://www.w3.org/ns/dqv#"
+        },
+        {
+          "name": "eval",
+          "uri": "http://purl.org/net/EvaluationResult#"
+        },
+        {
+          "name": "om",
+          "uri": "http://www.wurvoc.org/vocabularies/om-1.8/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "ldq",
+          "uri": "http://www.linkeddata.es/ontology/ldq#"
+        },
+        {
+          "name": "qmo",
+          "uri": "http://purl.org/net/QualityModel#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"BaseMeasure/\"+value.replace(\" \",\"\")",
+          "isRowNumberCell": false,
+          "columnName": "Measure_name",
+          "rdfTypes": [
+            {
+              "uri": "http://purl.org/net/QualityModel#BaseMeasure",
+              "curie": "qmo:BaseMeasure"
+            },
+            {
+              "uri": "http://purl.org/net/QualityModel#QualityMeasure",
+              "curie": "qmo:QualityMeasure"
+            },
+            {
+              "uri": "http://www.w3.org/ns/dqv#Metric",
+              "curie": "dqv:Metric"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://purl.org/net/QualityModel#hasScale",
+              "curie": "qmo:hasScale",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "if(value==\"boolean\",\"Scale/Boolean\",\nif(value ==\"ratio\",\"Scale/Ratio\",\nif(value==\"interval\",\"Scale/Interval\", null)))",
+                "isRowNumberCell": false,
+                "columnName": "scale",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                    "curie": "rdf:type",
+                    "target": {
+                      "nodeType": "cell-as-resource",
+                      "expression": "if(value==\"boolean\",\"http://www.wurvoc.org/vocabularies/om-1.8/Nominal_scale\",\nif(value ==\"ratio\",\"http://www.wurvoc.org/vocabularies/om-1.8/Ratio_scale\",\nif(value==\"interval\",\"http://www.wurvoc.org/vocabularies/om-1.8/Interval_scale\", null)))",
+                      "isRowNumberCell": false,
+                      "columnName": "scale",
+                      "rdfTypes": [],
+                      "links": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "http://www.linkeddata.es/ontology/ldq#hasGranularity",
+              "curie": "ldq:hasGranularity",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "if(value==\"IRI\", \"http://www.linkeddata.es/ontology/ldq#IRI\",\nif(value==\"graph\", \"http://www.linkeddata.es/ontology/ldq#Graph\",\nif(value==\"dataset\", \"http://www.linkeddata.es/ontology/ldq#Dataset\",null\n)))",
+                "isRowNumberCell": false,
+                "columnName": "granularity 1",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://www.linkeddata.es/ontology/ldq#hasGranularity",
+              "curie": "ldq:hasGranularity",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "if(value==\"IRI\", \"http://www.linkeddata.es/ontology/ldq#IRI\",\nif(value==\"graph\", \"http://www.linkeddata.es/ontology/ldq#Graph\",\nif(value==\"dataset\", \"http://www.linkeddata.es/ontology/ldq#Dataset\",null\n)))",
+                "isRowNumberCell": false,
+                "columnName": "granularity 2",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://www.linkeddata.es/ontology/ldq#hasGranularity",
+              "curie": "ldq:hasGranularity",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "if(value==\"IRI\", \"http://www.linkeddata.es/ontology/ldq#IRI\",\nif(value==\"graph\", \"http://www.linkeddata.es/ontology/ldq#Graph\",\nif(value==\"dataset\", \"http://www.linkeddata.es/ontology/ldq#Dataset\",null\n)))",
+                "isRowNumberCell": false,
+                "columnName": "granularity 3",
+                "rdfTypes": [],
+                "links": []
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://linkeddata.es/resource/ldqm/",
+      "prefixes": [
+        {
+          "name": "dc",
+          "uri": "http://purl.org/dc/elements/1.1/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "daq",
+          "uri": "http://purl.org/eis/vocab/daq#"
+        },
+        {
+          "name": "dqv",
+          "uri": "http://www.w3.org/ns/dqv#"
+        },
+        {
+          "name": "eval",
+          "uri": "http://purl.org/net/EvaluationResult#"
+        },
+        {
+          "name": "om",
+          "uri": "http://www.wurvoc.org/vocabularies/om-1.8/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "ldq",
+          "uri": "http://www.linkeddata.es/ontology/ldq#"
+        },
+        {
+          "name": "qmo",
+          "uri": "http://purl.org/net/QualityModel#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"BaseMeasure/\"+value.replace(\" \",\"\")",
+          "isRowNumberCell": false,
+          "columnName": "Measure_name",
+          "rdfTypes": [
+            {
+              "uri": "http://purl.org/net/QualityModel#BaseMeasure",
+              "curie": "qmo:BaseMeasure"
+            },
+            {
+              "uri": "http://purl.org/net/QualityModel#QualityMeasure",
+              "curie": "qmo:QualityMeasure"
+            },
+            {
+              "uri": "http://www.w3.org/ns/dqv#Metric",
+              "curie": "dqv:Metric"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://purl.org/net/QualityModel#hasScale",
+              "curie": "qmo:hasScale",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "if(value==\"boolean\",\"Scale/Boolean\",\nif(value ==\"ratio\",\"Scale/Ratio\",\nif(value==\"interval\",\"Scale/Interval\", null)))",
+                "isRowNumberCell": false,
+                "columnName": "scale",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                    "curie": "rdf:type",
+                    "target": {
+                      "nodeType": "cell-as-resource",
+                      "expression": "if(value==\"boolean\",\"http://www.wurvoc.org/vocabularies/om-1.8/Nominal_scale\",\nif(value ==\"ratio\",\"http://www.wurvoc.org/vocabularies/om-1.8/Ratio_scale\",\nif(value==\"interval\",\"http://www.wurvoc.org/vocabularies/om-1.8/Interval_scale\", null)))",
+                      "isRowNumberCell": false,
+                      "columnName": "scale",
+                      "rdfTypes": [],
+                      "links": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "http://www.linkeddata.es/ontology/ldq#hasGranularity",
+              "curie": "ldq:hasGranularity",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "if(value==\"IRI\", \"http://www.linkeddata.es/ontology/ldq#IRI\",\nif(value==\"graph\", \"http://www.linkeddata.es/ontology/ldq#Graph\",\nif(value==\"dataset\", \"http://www.linkeddata.es/ontology/ldq#Dataset\",null\n)))",
+                "isRowNumberCell": false,
+                "columnName": "granularity 1",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://www.linkeddata.es/ontology/ldq#hasGranularity",
+              "curie": "ldq:hasGranularity",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "if(value==\"IRI\", \"http://www.linkeddata.es/ontology/ldq#IRI\",\nif(value==\"graph\", \"http://www.linkeddata.es/ontology/ldq#Graph\",\nif(value==\"dataset\", \"http://www.linkeddata.es/ontology/ldq#Dataset\",null\n)))",
+                "isRowNumberCell": false,
+                "columnName": "granularity 2",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://www.linkeddata.es/ontology/ldq#hasGranularity",
+              "curie": "ldq:hasGranularity",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "if(value==\"IRI\", \"http://www.linkeddata.es/ontology/ldq#IRI\",\nif(value==\"graph\", \"http://www.linkeddata.es/ontology/ldq#Graph\",\nif(value==\"dataset\", \"http://www.linkeddata.es/ontology/ldq#Dataset\",null\n)))",
+                "isRowNumberCell": false,
+                "columnName": "granularity 3",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://purl.org/dc/elements/1.1/title",
+              "curie": "dc:title",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "Measure_name"
+              }
+            },
+            {
+              "uri": "http://purl.org/dc/elements/1.1/description",
+              "curie": "dc:description",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "definition"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://linkeddata.es/resource/ldqm/",
+      "prefixes": [
+        {
+          "name": "dc",
+          "uri": "http://purl.org/dc/elements/1.1/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "daq",
+          "uri": "http://purl.org/eis/vocab/daq#"
+        },
+        {
+          "name": "dqv",
+          "uri": "http://www.w3.org/ns/dqv#"
+        },
+        {
+          "name": "eval",
+          "uri": "http://purl.org/net/EvaluationResult#"
+        },
+        {
+          "name": "om",
+          "uri": "http://www.wurvoc.org/vocabularies/om-1.8/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "ldq",
+          "uri": "http://www.linkeddata.es/ontology/ldq#"
+        },
+        {
+          "name": "qmo",
+          "uri": "http://purl.org/net/QualityModel#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"BaseMeasure/\"+value.replace(\" \",\"\")",
+          "isRowNumberCell": false,
+          "columnName": "Measure_name",
+          "rdfTypes": [
+            {
+              "uri": "http://purl.org/net/QualityModel#BaseMeasure",
+              "curie": "qmo:BaseMeasure"
+            },
+            {
+              "uri": "http://purl.org/net/QualityModel#QualityMeasure",
+              "curie": "qmo:QualityMeasure"
+            },
+            {
+              "uri": "http://www.w3.org/ns/dqv#Metric",
+              "curie": "dqv:Metric"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://purl.org/net/QualityModel#hasScale",
+              "curie": "qmo:hasScale",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "if(value==\"boolean\",\"Scale/Boolean\",\nif(value ==\"ratio\",\"Scale/Ratio\",\nif(value==\"interval\",\"Scale/Interval\", null)))",
+                "isRowNumberCell": false,
+                "columnName": "scale",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                    "curie": "rdf:type",
+                    "target": {
+                      "nodeType": "cell-as-resource",
+                      "expression": "if(value==\"boolean\",\"http://www.wurvoc.org/vocabularies/om-1.8/Nominal_scale\",\nif(value ==\"ratio\",\"http://www.wurvoc.org/vocabularies/om-1.8/Ratio_scale\",\nif(value==\"interval\",\"http://www.wurvoc.org/vocabularies/om-1.8/Interval_scale\", null)))",
+                      "isRowNumberCell": false,
+                      "columnName": "scale",
+                      "rdfTypes": [],
+                      "links": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "http://www.linkeddata.es/ontology/ldq#hasGranularity",
+              "curie": "ldq:hasGranularity",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "if(value==\"IRI\", \"http://www.linkeddata.es/ontology/ldq#IRI\",\nif(value==\"graph\", \"http://www.linkeddata.es/ontology/ldq#Graph\",\nif(value==\"dataset\", \"http://www.linkeddata.es/ontology/ldq#Dataset\",null\n)))",
+                "isRowNumberCell": false,
+                "columnName": "granularity 1",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://www.linkeddata.es/ontology/ldq#hasGranularity",
+              "curie": "ldq:hasGranularity",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "if(value==\"IRI\", \"http://www.linkeddata.es/ontology/ldq#IRI\",\nif(value==\"graph\", \"http://www.linkeddata.es/ontology/ldq#Graph\",\nif(value==\"dataset\", \"http://www.linkeddata.es/ontology/ldq#Dataset\",null\n)))",
+                "isRowNumberCell": false,
+                "columnName": "granularity 2",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://www.linkeddata.es/ontology/ldq#hasGranularity",
+              "curie": "ldq:hasGranularity",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "if(value==\"IRI\", \"http://www.linkeddata.es/ontology/ldq#IRI\",\nif(value==\"graph\", \"http://www.linkeddata.es/ontology/ldq#Graph\",\nif(value==\"dataset\", \"http://www.linkeddata.es/ontology/ldq#Dataset\",null\n)))",
+                "isRowNumberCell": false,
+                "columnName": "granularity 3",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://purl.org/dc/elements/1.1/title",
+              "curie": "dc:title",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "Measure_name"
+              }
+            },
+            {
+              "uri": "http://purl.org/dc/elements/1.1/description",
+              "curie": "dc:description",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "definition"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "op": "rdf-extension/save-rdf-schema",
+    "description": "Save RDF schema skeleton",
+    "schema": {
+      "baseUri": "http://linkeddata.es/resource/ldqm/",
+      "prefixes": [
+        {
+          "name": "dc",
+          "uri": "http://purl.org/dc/elements/1.1/"
+        },
+        {
+          "name": "rdfs",
+          "uri": "http://www.w3.org/2000/01/rdf-schema#"
+        },
+        {
+          "name": "daq",
+          "uri": "http://purl.org/eis/vocab/daq#"
+        },
+        {
+          "name": "dqv",
+          "uri": "http://www.w3.org/ns/dqv#"
+        },
+        {
+          "name": "eval",
+          "uri": "http://purl.org/net/EvaluationResult#"
+        },
+        {
+          "name": "om",
+          "uri": "http://www.wurvoc.org/vocabularies/om-1.8/"
+        },
+        {
+          "name": "owl",
+          "uri": "http://www.w3.org/2002/07/owl#"
+        },
+        {
+          "name": "rdf",
+          "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        },
+        {
+          "name": "ldq",
+          "uri": "http://www.linkeddata.es/ontology/ldq#"
+        },
+        {
+          "name": "qmo",
+          "uri": "http://purl.org/net/QualityModel#"
+        }
+      ],
+      "rootNodes": [
+        {
+          "nodeType": "cell-as-resource",
+          "expression": "\"BaseMeasure/\"+value.replace(\" \",\"\")",
+          "isRowNumberCell": false,
+          "columnName": "Measure_name",
+          "rdfTypes": [
+            {
+              "uri": "http://purl.org/net/QualityModel#BaseMeasure",
+              "curie": "qmo:BaseMeasure"
+            },
+            {
+              "uri": "http://purl.org/net/QualityModel#QualityMeasure",
+              "curie": "qmo:QualityMeasure"
+            },
+            {
+              "uri": "http://www.w3.org/ns/dqv#Metric",
+              "curie": "dqv:Metric"
+            }
+          ],
+          "links": [
+            {
+              "uri": "http://purl.org/net/QualityModel#hasScale",
+              "curie": "qmo:hasScale",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "if(value==\"boolean\",\"Scale/Boolean\",\nif(value ==\"ratio\",\"Scale/Ratio\",\nif(value==\"interval\",\"Scale/Interval\", null)))",
+                "isRowNumberCell": false,
+                "columnName": "scale",
+                "rdfTypes": [],
+                "links": [
+                  {
+                    "uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                    "curie": "rdf:type",
+                    "target": {
+                      "nodeType": "cell-as-resource",
+                      "expression": "if(value==\"boolean\",\"http://www.wurvoc.org/vocabularies/om-1.8/Nominal_scale\",\nif(value ==\"ratio\",\"http://www.wurvoc.org/vocabularies/om-1.8/Ratio_scale\",\nif(value==\"interval\",\"http://www.wurvoc.org/vocabularies/om-1.8/Interval_scale\", null)))",
+                      "isRowNumberCell": false,
+                      "columnName": "scale",
+                      "rdfTypes": [],
+                      "links": []
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "uri": "http://www.linkeddata.es/ontology/ldq#hasGranularity",
+              "curie": "ldq:hasGranularity",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "if(value==\"IRI\", \"http://www.linkeddata.es/ontology/ldq#IRI\",\nif(value==\"graph\", \"http://www.linkeddata.es/ontology/ldq#Graph\",\nif(value==\"dataset\", \"http://www.linkeddata.es/ontology/ldq#Dataset\",\nif(value==\"triple\", \"http://www.linkeddata.es/ontology/ldq#Triple\",null\n))))",
+                "isRowNumberCell": false,
+                "columnName": "granularity 1",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://www.linkeddata.es/ontology/ldq#hasGranularity",
+              "curie": "ldq:hasGranularity",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "if(value==\"IRI\", \"http://www.linkeddata.es/ontology/ldq#IRI\",\nif(value==\"graph\", \"http://www.linkeddata.es/ontology/ldq#Graph\",\nif(value==\"dataset\", \"http://www.linkeddata.es/ontology/ldq#Dataset\",\nif(value==\"triple\", \"http://www.linkeddata.es/ontology/ldq#Triple\",null\n))))",
+                "isRowNumberCell": false,
+                "columnName": "granularity 2",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://www.linkeddata.es/ontology/ldq#hasGranularity",
+              "curie": "ldq:hasGranularity",
+              "target": {
+                "nodeType": "cell-as-resource",
+                "expression": "if(value==\"IRI\", \"http://www.linkeddata.es/ontology/ldq#IRI\",\nif(value==\"graph\", \"http://www.linkeddata.es/ontology/ldq#Graph\",\nif(value==\"dataset\", \"http://www.linkeddata.es/ontology/ldq#Dataset\",\nif(value==\"triple\", \"http://www.linkeddata.es/ontology/ldq#Triple\",null\n))))",
+                "isRowNumberCell": false,
+                "columnName": "granularity 3",
+                "rdfTypes": [],
+                "links": []
+              }
+            },
+            {
+              "uri": "http://purl.org/dc/elements/1.1/title",
+              "curie": "dc:title",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "Measure_name"
+              }
+            },
+            {
+              "uri": "http://purl.org/dc/elements/1.1/description",
+              "curie": "dc:description",
+              "target": {
+                "nodeType": "cell-as-literal",
+                "expression": "value",
+                "isRowNumberCell": false,
+                "columnName": "definition"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
